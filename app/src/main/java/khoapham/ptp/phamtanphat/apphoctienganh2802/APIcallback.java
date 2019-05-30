@@ -5,6 +5,6 @@ import retrofit2.http.GET;
 
 public interface APIcallback {
     // dinh nghia ra method ket noi lay thong tin
-    @GET("demo1.json")
+    @GET("json/tien/demo1.json")
     Call<Demo1> demo1api();
 }

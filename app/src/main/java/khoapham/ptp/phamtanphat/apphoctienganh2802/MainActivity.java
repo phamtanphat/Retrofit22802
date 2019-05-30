@@ -21,10 +21,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+    }
+    private void getDatademo1(){
         // tao ra connection voi api
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://khoapham.vn/KhoaPhamTraining/json/tien/")
+                .baseUrl("https://khoapham.vn/KhoaPhamTraining/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d("BBB",demo1.getLogo() );
                 Log.d("BBB",demo1.getFanpage() );
-                Log.d("BBB",demo1.getNoihoc() );
+                Log.d("BBB",demo1.getMonhoc() );
             }
 
             @Override
@@ -49,6 +53,5 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("BBB", t.getMessage());
             }
         });
-
     }
 }

@@ -8,9 +8,7 @@ public class Demo1 {
 @SerializedName("monhoc")
 @Expose
 private String monhoc;
-@SerializedName("noihoc")
-@Expose
-private String noihoc;
+
 @SerializedName("website")
 @Expose
 private String website;
@@ -29,13 +27,7 @@ public void setMonhoc(String monhoc) {
 this.monhoc = monhoc;
 }
 
-public String getNoihoc() {
-return noihoc;
-}
 
-public void setNoihoc(String noihoc) {
-this.noihoc = noihoc;
-}
 
 public String getWebsite() {
 return website;
