@@ -1,5 +1,6 @@
 package khoapham.ptp.phamtanphat.apphoctienganh2802;
 
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Tuvung>> call, Response<ArrayList<Tuvung>> response) {
                 ArrayList<Tuvung> mangtuvung = response.body();
                 Log.d("BBB",mangtuvung.size()  + " ");
+
             }
 
             @Override
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 
