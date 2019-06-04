@@ -13,4 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Responsedata {
 
+    private static final String base_url = "http://172.16.1.22:81/apituvung/";
+    public static final APICallback getData(){
+        return RetrofitInit.initRetro(base_url).create(APICallback.class);
+    }
 }
