@@ -12,6 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInit {
+    //base class
     private static Retrofit retrofit = null;
     public final static Retrofit initRetro(String base_url){
         OkHttpClient okHttpClient = new OkHttpClient.Builder()

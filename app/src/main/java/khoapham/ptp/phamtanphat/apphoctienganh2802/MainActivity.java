@@ -7,8 +7,11 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
+
 import khoapham.ptp.phamtanphat.apphoctienganh2802.API.APICallback;
 import khoapham.ptp.phamtanphat.apphoctienganh2802.API.Responsedata;
+import khoapham.ptp.phamtanphat.apphoctienganh2802.API.model.Tuvung;
 import khoapham.ptp.phamtanphat.apphoctienganh2802.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,6 +26,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        APICallback dataapi = Responsedata.getData();
+        Call<ArrayList<Tuvung>> callbackTuvung = dataapi.getTuvung();
+        callbackTuvung.enqueue(new Callback<ArrayList<Tuvung>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Tuvung>> call, Response<ArrayList<Tuvung>> response) {
+                ArrayList<Tuvung> mangtuvung = response.body();
+                Log.d("BBB",mangtuvung.size()  + " ");
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Tuvung>> call, Throwable t) {
+
+            }
+        });
 
     }
 
