@@ -4,6 +4,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
+    }
+    private void getWord(){
         APICallback dataapi = Responsedata.getData();
         Call<ArrayList<Tuvung>> callbackTuvung = dataapi.getTuvung();
         callbackTuvung.enqueue(new Callback<ArrayList<Tuvung>>() {
@@ -42,8 +48,54 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void toggleMemorized(){
+        APICallback dataapi = Responsedata.getData();
+        Call<String> callbackTuvung = dataapi.toggleMemorized("5","false");
+        callbackTuvung.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+                if (ketqua == null){
+                    Toast.makeText(MainActivity.this, "Khong tồn tại từ khóa", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (ketqua.equals("true")){
+                        Toast.makeText(MainActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(MainActivity.this, "Thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
 
+            }
+        });
+    }
+    private void deleteWord(){
+        APICallback dataapi = Responsedata.getData();
+        Call<String> callbackTuvung = dataapi.delete("1");
+        callbackTuvung.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+                if (ketqua == null){
+                    Toast.makeText(MainActivity.this, "Khong tồn tại từ khóa", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (ketqua.equals("true")){
+                        Toast.makeText(MainActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(MainActivity.this, "Thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 
 }
