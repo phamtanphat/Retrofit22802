@@ -31,7 +31,7 @@ public class TuvungAdapter extends ArrayAdapter<Tuvung> {
 
         Tuvung tuvung = getItem(position);
         txtEn.setText(tuvung.getEn());
-        txtVn.setText(tuvung.getVn());
+        txtVn.setText(tuvung.getIsMemorized().equals("true") ? "----" : tuvung.getVn());
         btnToggle.setText(tuvung.getIsMemorized().equals("true") ? "Forgot" : "isMemorized");
         btnToggle.setBackgroundColor(tuvung.getIsMemorized().equals("true") ? Color.rgb(33,136,56) : Color.rgb(200,35,51));
 
