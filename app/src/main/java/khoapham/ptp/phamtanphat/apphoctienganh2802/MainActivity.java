@@ -4,6 +4,11 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -23,11 +28,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    ListView lvTuvung;
+    ArrayList<Tuvung> wordsfilter = new ArrayList<>();
+    TuvungAdapter tuvungAdapter,tuvungAdapterFilter;
+    Button btnForm,btnAddWord,btnCancel;
+    RelativeLayout relativeFormtrue,relativeFormfalse;
+    Spinner spinner;
+    String[] mangoption = {"Show_All","Show_Forgot","Show_Memorized"};
+    ArrayAdapter spinnerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        lvTuvung = findViewById(R.id.listviewWord);
+        btnForm = findViewById(R.id.buttonForm);
+        btnAddWord = findViewById(R.id.buttonAddword);
+        btnCancel = findViewById(R.id.buttonCancel);
+        relativeFormfalse = findViewById(R.id.relativeFormfalse);
+        relativeFormtrue = findViewById(R.id.relativeFormtrue);
+        spinner = findViewById(R.id.spinner);
 
 
 
