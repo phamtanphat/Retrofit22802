@@ -148,16 +148,33 @@ public class MainActivity extends AppCompatActivity implements ListenData{
     }
 
     @Override
-    public void onSuccessData(ArrayList<Tuvung> mangtuvungs) {
+    public void onSuccessData(final ArrayList<Tuvung> mangtuvungs) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tuvungsfilter.clear();
+                tuvungAdapterFilter = new TuvungAdapter(MainActivity.this,android.R.layout.simple_list_item_1,tuvungsfilter);
+                lvTuvung.setAdapter(tuvungAdapterFilter);
                 switch (mangoption[position]){
                     case "Show_All" :
+                        tuvungsfilter.addAll(mangtuvungs);
+                        tuvungAdapterFilter.notifyDataSetChanged();
                         break;
                     case "Show_Forgot" :
+                        for (int i = 0 ; i<mangtuvungs.size() ;i++){
+                            if (mangtuvungs.get(i).getIsMemorized().equals("true")){
+                                tuvungsfilter.add(mangtuvungs.get(i));
+                            }
+                        }
+                        tuvungAdapterFilter.notifyDataSetChanged();
                         break;
                     case "Show_Memorized" :
+                        for (int i = 0 ; i<mangtuvungs.size() ;i++){
+                            if (mangtuvungs.get(i).getIsMemorized().equals("false")){
+                                tuvungsfilter.add(mangtuvungs.get(i));
+                            }
+                        }
+                        tuvungAdapterFilter.notifyDataSetChanged();
                         break;
                 }
             }
