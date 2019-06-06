@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         relativeFormtrue = findViewById(R.id.relativeFormtrue);
         spinner = findViewById(R.id.spinner);
 
+        spinnerAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,mangoption);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
 
 
     }
