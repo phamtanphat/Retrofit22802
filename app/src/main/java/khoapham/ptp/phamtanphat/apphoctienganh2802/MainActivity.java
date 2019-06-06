@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        getWord();
     }
     private void getWord(){
         APICallback dataapi = Responsedata.getData();
@@ -79,7 +80,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Tuvung>> call, Response<ArrayList<Tuvung>> response) {
                 ArrayList<Tuvung> mangtuvung = response.body();
-                Log.d("BBB",mangtuvung.size()  + " ");
+                if (mangtuvung.size() > 0){
+                    tuvungAdapter = new TuvungAdapter(MainActivity.this,android.R.layout.simple_list_item_1,mangtuvung);
+                    lvTuvung.setAdapter(tuvungAdapter);
+                }
 
             }
 
