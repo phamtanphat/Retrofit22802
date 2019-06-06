@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     ListView lvTuvung;
-    ArrayList<Tuvung> wordsfilter = new ArrayList<>();
+    ArrayList<Tuvung> tuvungsfilter = new ArrayList<>();
     TuvungAdapter tuvungAdapter,tuvungAdapterFilter;
     Button btnForm,btnAddWord,btnCancel;
     RelativeLayout relativeFormtrue,relativeFormfalse;
