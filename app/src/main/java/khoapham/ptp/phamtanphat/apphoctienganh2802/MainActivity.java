@@ -27,7 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListenData{
 
     ListView lvTuvung;
     ArrayList<Tuvung> tuvungsfilter = new ArrayList<>();
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     String[] mangoption = {"Show_All","Show_Forgot","Show_Memorized"};
     ArrayAdapter spinnerAdapter;
-
+    ListenData listenData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         relativeFormfalse = findViewById(R.id.relativeFormfalse);
         relativeFormtrue = findViewById(R.id.relativeFormtrue);
         spinner = findViewById(R.id.spinner);
+
+        listenData = MainActivity.this;
 
         spinnerAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,mangoption);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -85,12 +87,13 @@ public class MainActivity extends AppCompatActivity {
                     tuvungAdapter = new TuvungAdapter(MainActivity.this,android.R.layout.simple_list_item_1,mangtuvung);
                     lvTuvung.setAdapter(tuvungAdapter);
                 }
+                listenData.onSuccessData(mangtuvung);
 
             }
 
             @Override
             public void onFailure(Call<ArrayList<Tuvung>> call, Throwable t) {
-
+                listenData.onFail(t.getMessage());
             }
         });
     }
@@ -143,4 +146,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onSuccessData(ArrayList<Tuvung> mangtuvungs) {
+
+    }
+
+    @Override
+    public void onFail(String error) {
+
+    }
 }
