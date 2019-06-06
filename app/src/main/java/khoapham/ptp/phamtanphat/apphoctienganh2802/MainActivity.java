@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         getWord();
+
     }
     private void getWord(){
         APICallback dataapi = Responsedata.getData();
