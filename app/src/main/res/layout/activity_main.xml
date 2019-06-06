@@ -40,6 +40,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <Button
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="#218838"
                     android:layout_marginLeft="30dp"
                     android:layout_alignParentLeft="true"
                     android:id="@+id/buttonAddword"
@@ -48,6 +53,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <Button
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="#C93C3C"
                     android:layout_marginRight="30dp"
                     android:layout_alignParentRight="true"
                     android:id="@+id/buttonCancel"

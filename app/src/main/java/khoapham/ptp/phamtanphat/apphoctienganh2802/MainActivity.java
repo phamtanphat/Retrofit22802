@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements ListenData{
     ArrayList<Tuvung> tuvungsfilter = new ArrayList<>();
     TuvungAdapter tuvungAdapter,tuvungAdapterFilter;
     Button btnForm,btnAddWord,btnCancel;
+    EditText edtEn,edtVn;
     RelativeLayout relativeFormtrue,relativeFormfalse;
     Spinner spinner;
     String[] mangoption = {"Show_All","Show_Forgot","Show_Memorized"};
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements ListenData{
         relativeFormfalse = findViewById(R.id.relativeFormfalse);
         relativeFormtrue = findViewById(R.id.relativeFormtrue);
         spinner = findViewById(R.id.spinner);
+        edtEn = findViewById(R.id.edittextEn);
+        edtVn = findViewById(R.id.edittextVn);
 
         listenData = MainActivity.this;
 
@@ -73,9 +77,47 @@ public class MainActivity extends AppCompatActivity implements ListenData{
                 relativeFormfalse.setVisibility(View.VISIBLE);
             }
         });
+        btnAddWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String en = edtEn.getText().toString().trim();
+                String vn = edtVn.getText().toString().trim();
+                if (en.length() > 0 && vn.length() > 0){
+                 insert(en,vn);
+                }else {
+                    Toast.makeText(MainActivity.this, "Thêm thông tin đầy đủ", Toast.LENGTH_SHORT).show();
+                }
 
+            }
+        });
         getWord();
 
+    }
+    private void insert(String en , String vn){
+        APICallback apiCallback = Responsedata.getData();
+        Call<String> callbackInsert = apiCallback.insert(en ,vn);
+        callbackInsert.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String ketqua = response.body();
+                if (ketqua == null){
+                    Toast.makeText(MainActivity.this, "Khong tồn tại từ khóa", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (ketqua.equals("true")){
+                        Toast.makeText(MainActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
+                        getWord();
+                        btnCancel.performClick();
+                    }else{
+                        Toast.makeText(MainActivity.this, "Thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
     private void getWord(){
         APICallback dataapi = Responsedata.getData();
@@ -98,55 +140,6 @@ public class MainActivity extends AppCompatActivity implements ListenData{
             }
         });
     }
-    private void toggleMemorized(){
-        APICallback dataapi = Responsedata.getData();
-        Call<String> callbackTuvung = dataapi.toggleMemorized("5","false");
-        callbackTuvung.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                String ketqua = response.body();
-                if (ketqua == null){
-                    Toast.makeText(MainActivity.this, "Khong tồn tại từ khóa", Toast.LENGTH_SHORT).show();
-                }else{
-                    if (ketqua.equals("true")){
-                        Toast.makeText(MainActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(MainActivity.this, "Thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-    }
-    private void deleteWord(){
-        APICallback dataapi = Responsedata.getData();
-        Call<String> callbackTuvung = dataapi.delete("1");
-        callbackTuvung.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                String ketqua = response.body();
-                if (ketqua == null){
-                    Toast.makeText(MainActivity.this, "Khong tồn tại từ khóa", Toast.LENGTH_SHORT).show();
-                }else{
-                    if (ketqua.equals("true")){
-                        Toast.makeText(MainActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(MainActivity.this, "Thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-    }
-
     @Override
     public void onSuccessData(final ArrayList<Tuvung> mangtuvungs) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
