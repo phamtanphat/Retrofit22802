@@ -4,6 +4,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -54,6 +55,21 @@ public class MainActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
+        btnForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relativeFormtrue.setVisibility(View.VISIBLE);
+                relativeFormfalse.setVisibility(View.GONE);
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relativeFormtrue.setVisibility(View.GONE);
+                relativeFormfalse.setVisibility(View.VISIBLE);
+            }
+        });
 
     }
     private void getWord(){
