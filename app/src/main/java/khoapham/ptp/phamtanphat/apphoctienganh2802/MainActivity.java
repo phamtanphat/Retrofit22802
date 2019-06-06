@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -148,7 +149,24 @@ public class MainActivity extends AppCompatActivity implements ListenData{
 
     @Override
     public void onSuccessData(ArrayList<Tuvung> mangtuvungs) {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (mangoption[position]){
+                    case "Show_All" :
+                        break;
+                    case "Show_Forgot" :
+                        break;
+                    case "Show_Memorized" :
+                        break;
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
